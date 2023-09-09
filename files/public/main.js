@@ -41,12 +41,10 @@ const getVenues = async () => {
       const venues = shuffle(
         jsonResponse.response.groups[0].items.map((item) => item.venue)
       );
-      // console.log(venues);
+
       return venues;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 const getVenuePhotos = async (id) => {
@@ -61,9 +59,7 @@ const getVenuePhotos = async (id) => {
 
       return venuePhotoObj.prefix + "300x300" + venuePhotoObj.suffix;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 const getForecast = async () => {
@@ -74,21 +70,16 @@ const getForecast = async () => {
       const jsonResponse = await response.json();
       return jsonResponse;
     }
-  } catch (error) {
-    // console.log(error);
-  }
+  } catch (error) {}
 };
 
 // Render functions
 const renderVenues = (venues) => {
   $venueDivs.forEach(async ($venue, index) => {
-    // const randomVenues = shuffle(venues);
     const venue = venues[index];
-    //const venue = venues[Math.floor(Math.random()*venues.length)];
-    // console.log(venue);
+
     const venueIcon = venue.categories && venue.categories[0].icon;
-    // console.log(venue.categories)
-    // console.log(venue.categories[0].icon);
+
     const venueIconSrc = `${venueIcon.prefix}bg_64${venueIcon.suffix}`;
     const venueImgSrc = await getVenuePhotos(venue.id);
     let venueContent = createVenueHTML(
